@@ -36,25 +36,28 @@ class Playlist {
         
         this.name = name;
         this.tracks = [];
+
+        this.overallRating = function () {
+            
+            if(this.tracks.length === 0) return;
+            if(this.tracks.length === 1) return this.tracks[0].rating;
+            let avgRating = 0;
+           
+            for(let track of this.tracks) {
+                avgRating += track.rating;
+            }
+            return avgRating / this.tracks.length;
+        }
+        
+        this.totalLength = function () {
+            let totalLength = 0;
+            for(let track of this.tracks) {
+                totalLength += track.length;
+            }
+            return totalLength;
+        }
     }
 
-    this.overallRating = function () {
-        if(this.tracks.length === 0) return;
-        if(this.tracks.length === 1) return this.tracks[0].rating;
-        let avgRating = 0;
-        for(let track of this.tracks) {
-          avgRating += track.rating;
-        }
-        return avgRating / this.tracks.length;
-    }
-  
-      this.totalLength = function () {
-        let totalLength = 0;
-        for(let track of this.tracks) {
-          totalLength += track.length;
-        }
-        return totalLength;
-    }
 
 }
 
@@ -70,3 +73,23 @@ class Track {
 
 Library.setDefaults('Anonymous', 'Anonymous');
 Playlist.setDefaults('Anonymous');
+
+let lib = new Library(`Badass Jamzz`, `edward`);
+
+let playlistA = new Playlist('edward');
+let playlistB = new Playlist();
+
+console.log(playlistB);
+
+lib.playlists.push(playlistA);
+
+let trackA = new Track('Margaritaville', 5, 154)
+let trackB = new Track(`Cheeseburger In Paradise`, 2, 204)
+
+playlistA.tracks.push(trackA);
+playlistA.tracks.push(trackB);
+
+console.log(lib);
+console.log(lib.playlists[0].tracks[0]);
+console.log(lib.playlists[0].totalLength());
+console.log(lib.playlists[0].overallRating());
