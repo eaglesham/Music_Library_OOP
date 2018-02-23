@@ -1,5 +1,9 @@
 class Library {
 
+    static setDefaults(name, creator) {
+        Library._defaultLibrary = new Library(name, creator);
+    }
+    
     constructor(name, creator) {
 
         this.name = name;
@@ -12,6 +16,10 @@ class Library {
 
 class Playlist {
 
+    static setDefaults(name, creator) {
+        Playlist._defaultPlaylist = new Playlist(name);
+    }
+    
     constructor(name) {
 
         this.name = name;
@@ -31,3 +39,5 @@ class Track {
 
 }
 
+Library.setDefaults('Anonymous', 'Anonymous');
+Playlist.setDefaults('Anonymous');
